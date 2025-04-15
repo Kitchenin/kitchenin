@@ -1,0 +1,57 @@
+<div class="row cartItemsList__item" *ngFor="let key of Object.keys(userCart.items)">
+    <div class="col-xs-6">
+        <div class="panel__cell cartItemsList__description">
+            <div class="cartItemsList__imgWrapper">
+                <div class="cartItemsList__img"
+                    [ngStyle]="{ 'background-image': getProductImage(userCart.items[key].product) }"
+                ></div>
+            </div>
+            <div class="cartItemsList__descriptionText">
+                {{ userCart.items[key].product.name }}
+
+                <div *ngIf="userCart.items[key].isSample">Sample (355mm х 280mm)</div>
+
+                <div *ngIf="userCart.items[key].colour">Selected colour: {{ userCart.items[key].colour.name }}</div>
+
+                <div *ngIf="userCart.items[key].size">{{ userCart.items[key].size.name }}</div>
+                <div *ngIf="userCart.items[key].width">{{ userCart.items[key].height }}mm x {{
+                    userCart.items[key].width }}mm
+                </div>
+
+                <div *ngIf="userCart.items[key].ending">{{ userCart.items[key].ending.name }} edging</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-6 cartItemsList__cell">
+        <div class="row cartItemsList__cell">
+            <div class="col-xs-3 text-center">
+                <div class="panel__cell cartItemsList__cell">
+                    {{ userCart.items[key].price | currency : 'GBP' : true : '1.2-2' }}
+                </div>
+            </div>
+            <div class="col-xs-3 text-center">
+                <div class="panel__cell cartItemsList__cell">
+                    <mat-form-field appearance="outline">
+                        <input
+                            matInput
+                            type="number"
+                            (change)="saveCart()"
+                            [(ngModel)]="userCart.items[key].quantity"
+                            name="quantity[{{ userCart.items[key].product_id }}]"
+                        />
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="col-xs-3 text-center">
+                <div class="panel__cell cartItemsList__cell">
+                    {{ (userCart.items[key].price * userCart.items[key].quantity) | currency : 'GBP' : true : '1.2-2' }}
+                </div>
+            </div>
+            <div class="col-xs-3 text-center">
+                <div class="panel__cell cartItemsList__cell">
+                    <mat-icon (click)="removeItem(key)">delete</mat-icon>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

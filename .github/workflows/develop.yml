@@ -1,0 +1,95 @@
+name: Laravel
+
+on:
+  push:
+    branches: [ "develop" ]
+
+env:
+  BUILD_FILENAME: ${GITHUB_RUN_ID}.zip
+  BUILD: ${GITHUB_RUN_ID}
+  DEPLOY_ENV: production
+
+
+jobs:
+  laravel:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: pdo_sqlsrv, sqlsrv
+          tools: composer
+      - uses: actions/checkout@v4
+
+      - name: Install Dependencies
+        run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+
+      - name: Directory Permissions
+        run: chmod -R 777 storage bootstrap/cache
+
+      - name: Install SOPS
+        run: |
+            wget https://github.com/getsops/sops/releases/download/v3.8.1/sops-v3.8.1.linux.amd64 -O sops
+            chmod +x sops
+            sudo mv sops /usr/local/bin/
+
+      - name: Decrypt .env file
+        env:
+            SOPS_AGE_KEY: ${{ secrets.SOPS_AGE_SECRET }}
+        run: sops --input-type binary --output-type binary -d .env.develop.sops > .env
+
+      - name: Create releases folder
+        run: mkdir releases
+            
+      - name: Archive Release
+        uses: thedoctor0/zip-release@master
+        with:
+          type: 'zip'
+          filename: 'temp'
+          exclusions: '*.git* /*node_modules/* /*releases/*'            
+
+      - name: Move release to releases folder
+        run: mv temp.zip ./releases/${{env.BUILD_FILENAME}}
+
+      - name: List files
+        run: |
+          cat .env
+          ls -la
+          ls -al releases/
+
+      - name: Upload files via SFTP
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.SSH_SERVER }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          source: "./releases/"
+          target: "./www/dev.kitchenin.co.uk/"
+
+  ssh:
+    needs: laravel
+    name: SSH Run post-deploy script
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+
+      - name: executing remote ssh commands using key
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_SERVER }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          envs: GITHUB_RUN_ID
+          script: |
+            pwd
+            ls -al
+            cd ./www/dev.kitchenin.co.uk/releases && unzip -o "$GITHUB_RUN_ID.zip" -d $GITHUB_RUN_ID
+            rm -f "$GITHUB_RUN_ID.zip"
+            ls -al /home/u764-ha38snowvuzg/www/dev.kitchenin.co.uk/releases
+            ln -nfs /home/u764-ha38snowvuzg/www/dev.kitchenin.co.uk/releases/${GITHUB_RUN_ID} /home/u764-ha38snowvuzg/www/dev.kitchenin.co.uk/public_html

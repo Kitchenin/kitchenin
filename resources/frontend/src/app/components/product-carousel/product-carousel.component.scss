@@ -1,0 +1,14 @@
+@import '../../../assets/scss/variables';
+
+:host {
+    display: block;
+    margin: ($grid-gutter-width * 2) 0 0;
+    padding: ($grid-gutter-width * 2) 0;
+    background-color: $color-off-white;
+}
+
+.productCarousel__title {
+    margin-bottom: $grid-gutter-width*2;
+    font-weight: 700;
+    font-size: 20px;
+}

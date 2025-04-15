@@ -1,0 +1,21 @@
+<div class="productImagesCarousel__displayPanel" [ngStyle]="{ 'margin-bottom': filteredPhotos.length > 1 ? '15px' : '0' }">
+  <div
+    class="productImagesCarousel__displayPanelContent"
+    [ngStyle]="{ 'background-image': 'url(/images/products/' + encodeURI(selectedPhoto.filename) +')'}"
+    (click)="displayPanelClick()"
+  ></div>
+</div>
+
+<ul class="productImagesCarousel__imagesList" *ngIf="filteredPhotos.length > 1">
+    <li
+      *ngFor="let photo of filteredPhotos"
+      (click)="selectImage(photo)"
+      class="productImagesCarousel__imagesItem"
+      [ngClass]="{ 'productImagesCarousel__imagesItem--selected': photo.id === selectedPhoto.id }"
+    >
+      <div
+        [ngStyle]="{ 'background-image': 'url(/images/products/' + encodeURI(photo.filename) +')'}"
+        class="productImagesCarousel__imagesItemContainer"
+      ></div>
+    </li>
+</ul>

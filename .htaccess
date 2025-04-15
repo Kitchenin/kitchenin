@@ -1,0 +1,49 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine on
+
+    RewriteCond %{SERVER_PORT} 80
+    RewriteRule .* https://%{SERVER_NAME}%{REQUEST_URI} [R=301,L]
+
+    RewriteCond %{REQUEST_URI} !^public
+    RewriteRule .* public%{REQUEST_URI}
+
+    RewriteCond %{REQUEST_URI} !/(.+)/$
+    RewriteCond %{REQUEST_URI} !/$
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule .* %{REQUEST_URI}/ [R=301]
+
+    # 301
+
+    # wrong URL found in analytics
+    #RedirectMatch 301 ^/kitchenin\.co\.uk /
+    #Redirect 301 "/p/matt-doors_8/Zurfiz Supermatt Graphite Door_497" /kitchen-doors/matt/Zurfiz-Supermatt-Graphite/
+    #Redirect 301 /p/matt-doors_8 /kitchen-doors/matt/
+
+    # shorter URL rewrites (if needed)
+    #RedirectMatch 301 ^/kitchen-doors\/(.*)\/(.*) /product/$2
+    #RedirectMatch 301 ^/kitchen-units\/(.*)\/(.*) /product/$2
+    #RedirectMatch 301 ^/essential-components\/(.*) /product/$1
+    #RedirectMatch 301 ^/accessories\/(.*)\/(.*) /product/$2
+
+    # subcategories rename
+    Redirect 301 /kitchen-doors/high-gloss-doors /kitchen-doors/high-gloss/
+    Redirect 301 /kitchen-doors/matt-doors /kitchen-doors/matt/
+    Redirect 301 /kitchen-doors/handleless-doors /kitchen-doors/handleless/
+    Redirect 301 /kitchen-doors/handleless-rail-system-doors /kitchen-doors/handleless-rail-system/
+    Redirect 301 /kitchen-doors/woodgrain-doors /kitchen-doors/woodgrain/
+    Redirect 301 /kitchen-doors/traditional-doors /kitchen-doors/traditional/
+    Redirect 301 /kitchen-doors/hand-painted-doors /kitchen-doors/hand-painted/
+
+
+
+    Redirect 301 /kitchen-units/Standard-Kitchen-Units /kitchen-units/standard/
+    Redirect 301 /kitchen-doors/handleless/lucente-matt-dust-grey-and-anthracite /kitchen-doors/handleless/lucente-matt-dust-grey/
+    Redirect 301 /kitchen-door /kitchen-doors/
+
+
+
+    ##renamed products
+    #RedirectMatch 301 /(.*)-kitchen-door /$1/
+
+</IfModule>
+AddHandler application/x-httpd-php73 .php .php5 .php4 .php3

@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="row">
+    <div *ngFor="let block of blocks" class="col-sm-4 col-xs-12">
+      <div class="introBlock">
+        <img class="introBlock__img" [src]="block.img" height="47" />
+        <div class="introBlock__title">{{ block.title }}</div>
+        <div class="introBlock__text">{{ block.text }}</div>
+      </div>
+    </div>
+    <div class="col-xs-12">
+        <div class="introBlock introBlock--special">
+          <div class="row">
+            <div class="col-xs-12 col-sm-4">
+              <img class="introBlock__img" src="/assets/img/icon-assembly.png" height="47" />
+              <div class="introBlock__title">Need installation?</div>
+              <div class="introBlock__text">Check the map for the area we cover</div>
+            </div>
+            <div class="col-xs-12 col-sm-8">
+              <img src="/assets/img/coverage-map.png" style="margin: -40px 0; height: 196px;" />
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>

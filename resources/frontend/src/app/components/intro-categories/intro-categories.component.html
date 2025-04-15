@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="row">
+    <div *ngFor="let category of categories" class="col-sm-6 col-xs-12">
+      <div class="introCategory">
+        <div class="introCategory__img" [ngStyle]="getImageStyles(category)"></div>
+        <div class="introCategory__content">
+          <div class="introCategory__title">
+            {{ category.name }}
+          </div>
+
+          <div class="introCategory__text">
+            <!-- {{ category.description | htmlToText }} -->
+            {{ descriptions[category.id] }}
+          </div>
+
+          <a class="introCategory__cta btn btn-primary btn-lg" [routerLink]="'/category/' + category.id">Shop now</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

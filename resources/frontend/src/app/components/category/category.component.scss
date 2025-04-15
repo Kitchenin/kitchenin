@@ -1,0 +1,7 @@
+@import "../../../assets/scss/variables";
+
+:host {
+    display: flex;
+    flex: 1;
+    background: $color-off-white;
+}

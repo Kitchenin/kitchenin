@@ -1,0 +1,28 @@
+<div class="introCarousel">
+    <div class="introCarousel__wrapper">
+
+        <ul class="panes" style="width: {{ slides.length * 100 + '%' }}" [ngStyle]="wrapperStyles">
+            <li *ngFor="let slide of slides" [ngStyle]="{ 'width': 100 / slides.length + '%' }">
+                <div class="introCarousel__slide" [ngStyle]="{ 'background-image': 'url(' +  slide.imageUrl + ')' }">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="introCarousel__card" *ngIf="slide.title">
+                                    <div class="introCarousel__title">{{ slide.title}}</div>
+                                    <div class="introCarousel__subtitle">{{ slide.subtitle}}</div>
+                                    <div class="introCarousel__subtitle">From <strong>{{ slide.price | currency : 'GBP' : true : '1.2-2' }}</strong></div>
+                                    <a [routerLink]="[slide.path]" class="btn btn-primary btn-lg">Shop now</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+
+        <ul class="navigation list-unstyled">
+            <li *ngFor="let dot of slides; let i = index;" (click)="setCurrentSlideTo(i)" class="navigation__dot" [ngClass]="{ 'navigation__dot--selected': currentIndex === i }"></li>
+        </ul>
+
+    </div>
+</div>
