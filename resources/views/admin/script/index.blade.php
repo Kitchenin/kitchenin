@@ -14,21 +14,22 @@
                 </div>
                 <div class="panel-body" style="background-color: #fafafa;">
 
-                    {{ Form::open(['url' => 'admin/script/backup']) }}
+                    <form action="{{ url('admin/script/backup') }}" method="POST">
+                        @csrf
 
-                    <div class="row">
+                        <div class="row">
 
-                        <div class="form-group col-md-6">
-                            This will create a backup of the whole DB
+                            <div class="form-group col-md-6">
+                                This will create a backup of the whole DB
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <button type="submit" class="btn btn-lg btn-primary btn-form-submit">BACKUP</button>
+                            </div>
+
                         </div>
 
-                        <div class="form-group col-md-6">
-                            {{ Form::submit('BACKUP', ['class' => 'btn btn-lg btn-primary btn-form-submit']) }}
-                        </div>
-
-                    </div>
-
-                    {{ Form::close() }}
+                    </form>
                 </div>
             </div>
         </div>
@@ -40,30 +41,34 @@
                 </div>
                 <div class="panel-body" style="background-color: #fafafa;">
 
-                    {{ Form::open(['url' => 'admin/script/restore']) }}
+                    <form action="{{ url('admin/script/restore') }}" method="POST">
+                        @csrf
 
-                    <div class="row">
+                        <div class="row">
 
-                        <div class="form-group col-md-6">
-                            <label for="filename"><i class="fa fa-asterisk text-danger"></i> Restore File:</label>
-                            <select name="filename" id="filename" class="form-control">
-                                @foreach($restores as $file)
-                                    <option value="{{ $file }}">{{ $file }}</option>
-                                @endforeach
-                            </select>
+                            <div class="form-group col-md-6">
+                                <label for="filename">
+                                    <i class="fa fa-asterisk text-danger"></i> Restore File:
+                                </label>
+                                <select name="filename" id="filename" class="form-control">
+                                    @foreach($restores as $file)
+                                        <option value="{{ $file }}">{{ $file }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <button type="submit" class="btn btn-lg btn-primary btn-form-submit">
+                                    RESTORE
+                                </button>
+                            </div>
+
                         </div>
 
-                        <div class="form-group col-md-6">
-                            {{ Form::submit('RESTORE', ['class' => 'btn btn-lg btn-primary btn-form-submit']) }}
-                        </div>
-
-                    </div>
-
-                    {{ Form::close() }}
+                    </form>
                 </div>
             </div>
         </div>
-
     </div>
 
     <div class="row">
@@ -75,32 +80,48 @@
                 </div>
                 <div class="panel-body" style="background-color: #fafafa;">
 
-                    {{ Form::open(['url' => 'admin/script/price/increase']) }}
+                    <form action="{{ url('admin/script/price/increase') }}" method="POST">
+                        @csrf
 
-                    <div class="row">
+                        <div class="row">
 
-                        <div class="form-group col-md-6">
-                            <label for="percentage"><i class="fa fa-asterisk text-danger"></i> Percentage:</label>
-                            {{ Form::text('percentage', null, ['class' => 'form-control']) }}
+                            <div class="form-group col-md-6">
+                                <label for="percentage">
+                                    <i class="fa fa-asterisk text-danger"></i> Percentage:
+                                </label>
+                                <input
+                                        type="text"
+                                        id="percentage"
+                                        name="percentage"
+                                        value="{{ old('percentage') }}"
+                                        class="form-control"
+                                >
+                                @error('percentage')
+                                <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label for="category_id">Category:</label>
+                                <select name="category_id" id="category_id" class="form-control">
+                                    <option value="0" {{ old('category_id') == 0 ? 'selected' : '' }}>All categories</option>
+                                    @foreach($categories as $category)
+                                        <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>
+                                            {{ $category->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <button type="submit" class="btn btn-lg btn-primary btn-form-submit">
+                                    INCREASE
+                                </button>
+                            </div>
+
                         </div>
 
-                        <div class="form-group col-md-6">
-                            <label for="category_id">Category:</label>
-                            <select name="category_id" id="category_id" class="form-control">
-                                <option value="0">All categories</option>
-                                @foreach($categories as $category)
-                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <div class="form-group col-md-6">
-                            {{ Form::submit('INCREASE', ['class' => 'btn btn-lg btn-primary btn-form-submit']) }}
-                        </div>
-
-                    </div>
-
-                    {{ Form::close() }}
+                    </form>
                 </div>
             </div>
         </div>
@@ -112,32 +133,48 @@
                 </div>
                 <div class="panel-body" style="background-color: #fafafa;">
 
-                    {{ Form::open(['url' => 'admin/script/price/decrease']) }}
+                    <form action="{{ url('admin/script/price/decrease') }}" method="POST">
+                        @csrf
 
-                    <div class="row">
+                        <div class="row">
 
-                        <div class="form-group col-md-6">
-                            <label for="percentage"><i class="fa fa-asterisk text-danger"></i> Percentage:</label>
-                            {{ Form::text('percentage', null, ['class' => 'form-control']) }}
+                            <div class="form-group col-md-6">
+                                <label for="percentage">
+                                    <i class="fa fa-asterisk text-danger"></i> Percentage:
+                                </label>
+                                <input
+                                        type="text"
+                                        id="percentage"
+                                        name="percentage"
+                                        value="{{ old('percentage') }}"
+                                        class="form-control"
+                                >
+                                @error('percentage')
+                                <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label for="category_id">Category:</label>
+                                <select name="category_id" id="category_id" class="form-control">
+                                    <option value="0" {{ old('category_id') == 0 ? 'selected' : '' }}>All categories</option>
+                                    @foreach($categories as $category)
+                                        <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>
+                                            {{ $category->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <button type="submit" class="btn btn-lg btn-primary btn-form-submit">
+                                    DECREASE
+                                </button>
+                            </div>
+
                         </div>
 
-                        <div class="form-group col-md-6">
-                            <label for="category_id">Category:</label>
-                            <select name="category_id" id="category_id" class="form-control">
-                                <option value="0">All categories</option>
-                                @foreach($categories as $category)
-                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <div class="form-group col-md-6">
-                            {{ Form::submit('DECREASE', ['class' => 'btn btn-lg btn-primary btn-form-submit']) }}
-                        </div>
-
-                    </div>
-
-                    {{ Form::close() }}
+                    </form>
                 </div>
             </div>
         </div>

@@ -7,19 +7,30 @@
 
         <div id="form-status"></div>
 
-        {{ Form::open(['url' => $formUrl, 'files' => true, 'id' => 'adminAjaxForm', 'class' => isset($item) ? 'edit-form' : 'create-form']) }}
+        {{-- Open the form with regular HTML --}}
+        <form action="{{ $formUrl }}" method="POST" enctype="multipart/form-data" id="adminAjaxForm" class="{{ isset($item) ? 'edit-form' : 'create-form' }}">
+            @csrf
 
-        @yield('content')
+            {{-- Include PUT request method if updating --}}
+            @if (isset($item))
+                @method('PUT')
+            @endif
 
-        @section('form-buttons')
-        <div class="row">
-            <div class="form-group col-md-12">
-                {{ Form::submit(isset($item) ? 'Update' : 'Add', ['class' => 'btn btn-lg btn-primary btn-form-submit']) }}
-                <a href="#" class="btn btn-lg btn-warning btn-form-cancel">Cancel</a>
-            </div>
-        </div>
-        @show
+            {{-- Dynamic content slot --}}
+            @yield('content')
 
-        {{ Form::close() }}
+            {{-- Dynamic form buttons --}}
+            @section('form-buttons')
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <button type="submit" class="btn btn-lg btn-primary btn-form-submit">
+                            {{ isset($item) ? 'Update' : 'Add' }}
+                        </button>
+                        <a href="#" class="btn btn-lg btn-warning btn-form-cancel">Cancel</a>
+                    </div>
+                </div>
+            @show
+        </form>
+        {{-- Close form --}}
     </div>
 </div>

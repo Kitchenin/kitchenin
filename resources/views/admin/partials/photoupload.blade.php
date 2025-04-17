@@ -8,11 +8,11 @@
 
         <div class="row">
             <div class="form-group col-md-6">
-                <label for="filename">Images:</label>
+                <label for="photos">Images:</label>
                 <div class="fancy-file-upload fancy-file-warning">
                     <i class="fa fa-upload"></i>
-                    {{ Form::file('photos[]', ['class' => 'form-control file-upload', 'id' => 'input-file', 'multiple' => true]) }}
-                    <input type="text" class="form-control" placeholder="no file selected" readonly="" />
+                    <input type="file" name="photos[]" class="form-control file-upload" id="input-file" multiple>
+                    <input type="text" class="form-control" placeholder="no file selected" readonly />
                     <span class="button">Choose files</span>
                 </div>
             </div>
