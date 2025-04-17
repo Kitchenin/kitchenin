@@ -6,17 +6,33 @@
 
         <div class="form-group col-md-4">
             <label for="name"><i class="fa fa-asterisk text-danger"></i> Name:</label>
-            {{ Form::text('name', isset($item) ? $item->name : null, ['class' => 'form-control']) }}
+            <input type="text" id="name" name="name" value="{{ old('name', $item->name ?? '') }}" class="form-control">
+            @error('name')
+            <span class="text-danger">{{ $message }}</span>
+            @enderror
         </div>
 
         <div class="form-group col-md-4">
             <label for="parent_id">Main Category:</label>
-            {{ Form::select('parent_id', ['' => 'NONE'] + $categories->pluck('name', 'id')->all(), isset($item) ? $item->parent_id : null, ['class' => 'form-control']) }}
+            <select id="parent_id" name="parent_id" class="form-control">
+                <option value="">NONE</option>
+                @foreach ($categories as $category)
+                    <option value="{{ $category->id }}" {{ (old('parent_id', $item->parent_id ?? '') == $category->id) ? 'selected' : '' }}>
+                        {{ $category->name }}
+                    </option>
+                @endforeach
+            </select>
+            @error('parent_id')
+            <span class="text-danger">{{ $message }}</span>
+            @enderror
         </div>
 
         <div class="form-group col-md-3">
-            <label for="order"> Order:</label>
-            {{ Form::text('order', isset($item) ? $item->order : null, ['class' => 'form-control']) }}
+            <label for="order">Order:</label>
+            <input type="text" id="order" name="order" value="{{ old('order', $item->order ?? '') }}" class="form-control">
+            @error('order')
+            <span class="text-danger">{{ $message }}</span>
+            @enderror
         </div>
 
     </div>
@@ -25,33 +41,49 @@
 
         <div class="form-group col-md-4">
             <label for="slug"><i class="fa fa-asterisk text-danger"></i> Slug:</label>
-            {{ Form::text('slug', isset($item) ? $item->slug : null, ['class' => 'form-control']) }}
+            <input type="text" id="slug" name="slug" value="{{ old('slug', $item->slug ?? '') }}" class="form-control">
+            @error('slug')
+            <span class="text-danger">{{ $message }}</span>
+            @enderror
         </div>
 
         <div class="form-group col-md-4">
             <label for="h1">H1:</label>
-            {{ Form::text('h1', isset($item) ? $item->h1 : null, ['class' => 'form-control']) }}
+            <input type="text" id="h1" name="h1" value="{{ old('h1', $item->h1 ?? '') }}" class="form-control">
+            @error('h1')
+            <span class="text-danger">{{ $message }}</span>
+            @enderror
         </div>
+
     </div>
 
     <div class="row">
         <div class="form-group col-md-12">
             <label for="description">Description:</label>
-            {{ Form::textarea('description',  isset($item) ? $item->description : '', ['id' => 'description', 'class' => 'form-control ckeditor', 'rows' => 8]) }}
+            <textarea id="description" name="description" class="form-control ckeditor" rows="8">{{ old('description', $item->description ?? '') }}</textarea>
+            @error('description')
+            <span class="text-danger">{{ $message }}</span>
+            @enderror
         </div>
     </div>
 
     <div class="row">
         <div class="form-group col-md-12">
             <label for="page_title">Page Title:</label>
-            {{ Form::text('page_title', isset($item) ? $item->page_title : null, ['class' => 'form-control']) }}
+            <input type="text" id="page_title" name="page_title" value="{{ old('page_title', $item->page_title ?? '') }}" class="form-control">
+            @error('page_title')
+            <span class="text-danger">{{ $message }}</span>
+            @enderror
         </div>
     </div>
 
     <div class="row">
         <div class="form-group col-md-12">
             <label for="meta_description">Meta Description:</label>
-            {{ Form::text('meta_description', isset($item) ? $item->meta_description : null, ['class' => 'form-control']) }}
+            <input type="text" id="meta_description" name="meta_description" value="{{ old('meta_description', $item->meta_description ?? '') }}" class="form-control">
+            @error('meta_description')
+            <span class="text-danger">{{ $message }}</span>
+            @enderror
         </div>
     </div>
 

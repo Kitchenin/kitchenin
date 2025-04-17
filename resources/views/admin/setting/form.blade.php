@@ -4,19 +4,46 @@
 
     <div class="row">
 
+        <!-- Name Field -->
         <div class="form-group col-md-4">
-            <label for="name"><i class="fa fa-asterisk text-danger"></i> Name (Search key):</label>
-            {{ Form::text('name', isset($item) ? $item->name : null, ['class' => 'form-control']) }}
+            <label for="name">
+                <i class="fa fa-asterisk text-danger"></i> Name (Search key):
+            </label>
+            <input
+                    type="text"
+                    name="name"
+                    id="name"
+                    value="{{ isset($item) ? $item->name : '' }}"
+                    class="form-control"
+            />
         </div>
 
+        <!-- Title Field -->
         <div class="form-group col-md-4">
-            <label for="title"><i class="fa fa-asterisk text-danger"></i> Title (Text):</label>
-            {{ Form::text('title', isset($item) ? $item->title : null, ['class' => 'form-control']) }}
+            <label for="title">
+                <i class="fa fa-asterisk text-danger"></i> Title (Text):
+            </label>
+            <input
+                    type="text"
+                    name="title"
+                    id="title"
+                    value="{{ isset($item) ? $item->title : '' }}"
+                    class="form-control"
+            />
         </div>
 
+        <!-- Value Field -->
         <div class="form-group col-md-4">
-            <label for="value"><i class="fa fa-asterisk text-danger"></i> Value:</label>
-            {{ Form::text('value', isset($item) ? $item->value : null, ['class' => 'form-control']) }}
+            <label for="value">
+                <i class="fa fa-asterisk text-danger"></i> Value:
+            </label>
+            <input
+                    type="text"
+                    name="value"
+                    id="value"
+                    value="{{ isset($item) ? $item->value : '' }}"
+                    class="form-control"
+            />
         </div>
 
     </div>

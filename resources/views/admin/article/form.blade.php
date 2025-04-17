@@ -9,12 +9,30 @@
 
                 <div class="form-group col-md-6">
                     <label for="title"><i class="fa fa-asterisk text-danger"></i> Title:</label>
-                    {{ Form::text('title', isset($item) ? $item->title : null, ['class' => 'form-control']) }}
+                    <input
+                            type="text"
+                            name="title"
+                            id="title"
+                            value="{{ isset($item) ? $item->title : old('title') }}"
+                            class="form-control"
+                    >
+                    @error('title')
+                    <span class="text-danger">{{ $message }}</span>
+                    @enderror
                 </div>
 
                 <div class="form-group col-md-6">
                     <label for="slug"><i class="fa fa-asterisk text-danger"></i> Slug:</label>
-                    {{ Form::text('slug', isset($item) ? $item->slug : null, ['class' => 'form-control']) }}
+                    <input
+                            type="text"
+                            name="slug"
+                            id="slug"
+                            value="{{ isset($item) ? $item->slug : old('slug') }}"
+                            class="form-control"
+                    >
+                    @error('slug')
+                    <span class="text-danger">{{ $message }}</span>
+                    @enderror
                 </div>
 
             </div>
@@ -27,34 +45,65 @@
             <div class="row">
                 <div class="form-group col-md-12">
                     <label for="excerpt">Short Description:</label>
-                    {{ Form::textarea('excerpt',  isset($item) ? $item->excerpt : null, ['id' => 'excerpt','class' => 'form-control ckeditor', 'rows' => 4]) }}
+                    <textarea
+                            name="excerpt"
+                            id="excerpt"
+                            class="form-control ckeditor"
+                            rows="4"
+                    >{{ isset($item) ? $item->excerpt : old('excerpt') }}</textarea>
+                    @error('excerpt')
+                    <span class="text-danger">{{ $message }}</span>
+                    @enderror
                 </div>
             </div>
-
 
             <div class="row">
                 <div class="form-group col-md-12">
                     <label for="content">Full Text:</label>
-                    {{ Form::textarea('content',  isset($item) ? $item->content : null, ['id' => 'content','class' => 'form-control ckeditor', 'rows' => 10]) }}
+                    <textarea
+                            name="content"
+                            id="content"
+                            class="form-control ckeditor"
+                            rows="10"
+                    >{{ isset($item) ? $item->content : old('content') }}</textarea>
+                    @error('content')
+                    <span class="text-danger">{{ $message }}</span>
+                    @enderror
                 </div>
             </div>
 
             <div class="row">
                 <div class="form-group col-md-12">
                     <label for="page_title">Page Title:</label>
-                    {{ Form::textarea('page_title',  isset($item) ? $item->page_title : null, ['id' => 'page_title','class' => 'form-control', 'rows' => 4]) }}
+                    <textarea
+                            name="page_title"
+                            id="page_title"
+                            class="form-control"
+                            rows="4"
+                    >{{ isset($item) ? $item->page_title : old('page_title') }}</textarea>
+                    @error('page_title')
+                    <span class="text-danger">{{ $message }}</span>
+                    @enderror
                 </div>
             </div>
 
             <div class="row">
                 <div class="form-group col-md-12">
                     <label for="meta_description">Meta Description:</label>
-                    {{ Form::textarea('meta_description',  isset($item) ? $item->meta_description : null, ['id' => 'meta_description','class' => 'form-control', 'rows' => 4]) }}
+                    <textarea
+                            name="meta_description"
+                            id="meta_description"
+                            class="form-control"
+                            rows="4"
+                    >{{ isset($item) ? $item->meta_description : old('meta_description') }}</textarea>
+                    @error('meta_description')
+                    <span class="text-danger">{{ $message }}</span>
+                    @enderror
                 </div>
             </div>
         </div>
     </div>
 
-    @include('admin.partials.photoupload', ['type' => 'articles', 'item' => isset($item) ? $item : null])
+    @include('admin.partials.photoupload', ['type' => 'articles', 'item' => $item ?? null])
 
 @endsection
