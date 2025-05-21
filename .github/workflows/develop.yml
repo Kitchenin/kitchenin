@@ -29,6 +29,17 @@ jobs:
       - name: Directory Permissions
         run: chmod -R 777 storage bootstrap/cache
 
+      - name: Install SOPS
+        run: |
+          wget https://github.com/getsops/sops/releases/download/v3.8.1/sops-v3.8.1.linux.amd64 -O sops
+          chmod +x sops
+          sudo mv sops /usr/local/bin/
+
+      - name: Decrypt .env file
+        env:
+          SOPS_AGE_KEY: ${{ secrets.SOPS_AGE_SECRET }}
+        run: sops --input-type binary --output-type binary -d .env.production.sops > .env
+
       - name: Setup Node 16.x
         uses: actions/setup-node@v3
         with:
@@ -38,17 +49,6 @@ jobs:
       - run: npm ci
 
       - run: npm run build
-
-      - name: Install SOPS
-        run: |
-            wget https://github.com/getsops/sops/releases/download/v3.8.1/sops-v3.8.1.linux.amd64 -O sops
-            chmod +x sops
-            sudo mv sops /usr/local/bin/
-
-      - name: Decrypt .env file
-        env:
-            SOPS_AGE_KEY: ${{ secrets.SOPS_AGE_SECRET }}
-        run: sops --input-type binary --output-type binary -d .env.develop.sops > .env
 
       - name: Create releases folder
         run: mkdir releases
