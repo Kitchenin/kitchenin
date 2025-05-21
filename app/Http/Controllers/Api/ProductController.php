@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Product,
-    App\Http\Controllers\Controller;
+use App\Http\Controllers\Controller;
+use App\Models\Product;
 
 class ProductController extends Controller
 {

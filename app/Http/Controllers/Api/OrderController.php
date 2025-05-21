@@ -3,12 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use App\Helpers\OrderHelper;
+use App\Http\Controllers\Controller;
 use App\Order;
 use App\OrderProduct;
-use App\Product;
 use Exception;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
 class OrderController extends Controller
 {

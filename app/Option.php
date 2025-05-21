@@ -2,7 +2,6 @@
 
 namespace App;
 
-use App\Traits\OrderByIndex;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Option extends ShopModel
@@ -14,7 +13,7 @@ class Option extends ShopModel
 
     public function product()
     {
-        return $this->belongsTo('App\Product');
+        return $this->belongsTo('App\Models\Product');
     }
 
     public function photos()

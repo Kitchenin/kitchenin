@@ -2,7 +2,6 @@
 
 namespace App;
 
-use App\Traits\OrderByIndex;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Colour extends ShopModel
@@ -16,7 +15,7 @@ class Colour extends ShopModel
 
     public function products()
     {
-        return $this->belongsToMany('App\Product')->withPivot('price');
+        return $this->belongsToMany('App\Models\Product')->withPivot('price');
     }
 
     public function colourGroup()

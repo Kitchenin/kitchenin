@@ -13,6 +13,6 @@ class Parameter extends ShopModel
 
     public function product()
     {
-        return $this->belongsTo('App\Product');
+        return $this->belongsTo('App\Models\Product');
     }
 }

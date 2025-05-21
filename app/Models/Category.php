@@ -32,7 +32,7 @@ class Category extends ShopModel
 
     public function products()
     {
-        return $this->hasMany('App\Product');
+        return $this->hasMany('App\Models\Product');
     }
 
     public function photos()
@@ -53,7 +53,9 @@ class Category extends ShopModel
 
     public static function getMainCategories()
     {
-        return self::with('children')->where('parent_id', null)->orderBy('order', 'asc')->get();
+        return self::with('children')
+            ->where('parent_id', null)
+            ->orderBy('order', 'asc')->get();
     }
 
     /**

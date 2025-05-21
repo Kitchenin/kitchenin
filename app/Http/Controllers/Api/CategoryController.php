@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
-use App\Product;
+use App\Models\Product;
 
 class CategoryController extends Controller
 {
