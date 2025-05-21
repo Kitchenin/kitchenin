@@ -1,0 +1,17 @@
+{
+  "resources/css/app.css": {
+    "file": "assets/app-CeqNmo-s.css",
+    "src": "resources/css/app.css",
+    "isEntry": true
+  },
+  "resources/images/Kitchenin-Logo.png": {
+    "file": "assets/Kitchenin-Logo-D60nOwjt.png",
+    "src": "resources/images/Kitchenin-Logo.png"
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-T1DpEqax.js",
+    "name": "app",
+    "src": "resources/js/app.js",
+    "isEntry": true
+  }
+}
