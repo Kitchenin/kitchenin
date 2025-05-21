@@ -143,6 +143,9 @@ Route::group([
     Route::post('paypalwebhook', 'PayPalController@webhook');
 
     Route::get('/', 'HomeController@index');
-    Route::get('/{category_slug}','CategoryController@getItems');
+    Route::get('/{category_slug}','CategoryController@getChildren')
+        ->name('category');
+    Route::get('/{category_slug}/{child_slug}','CategoryController@getItems')
+        ->name('category.items');
 
 });

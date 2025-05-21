@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Product;
+use App\Http\Controllers\Controller;
+use App\Models\Product;
 use App\Setting;
 use Exception;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
 class BasketController extends Controller
 {

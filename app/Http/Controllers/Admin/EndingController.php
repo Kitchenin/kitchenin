@@ -4,10 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Ending;
 use App\EndingGroup;
+use App\Helpers\PhotoHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreEndingRequest;
-use App\Helpers\PhotoHelper;
-use App\Product;
 
 
 class EndingController extends Controller

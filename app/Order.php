@@ -6,8 +6,8 @@ use App\Mail\OrderReceivedAdmin;
 use App\Mail\OrderReceivedClient;
 use App\Mail\OrderReview;
 use Carbon\Carbon;
-use niklasravnsborg\LaravelPdf\Facades\Pdf as PDF;
 use Illuminate\Support\Facades\Mail;
+use niklasravnsborg\LaravelPdf\Facades\Pdf as PDF;
 use PhpOffice\PhpWord\TemplateProcessor;
 
 
@@ -25,7 +25,7 @@ class Order extends ShopModel
 
     public function products()
     {
-        return $this->belongsToMany('App\Product')
+        return $this->belongsToMany('App\Models\Product')
             ->using('App\OrderProduct')
             ->withPivot('custom_size', 'hinge_side', 'hinge_top', 'hinge_center', 'hinge_bottom', 'hinge_left', 'hinge_right', 'position', 'quantity', 'price', 'ending_id', 'option_id', 'colour_id', 'sample');
     }

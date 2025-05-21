@@ -21,11 +21,14 @@
             <ul class="nav-menu">
                 @foreach($menu as $category)
                     <li class="nav-item dropdown">
-                        <a href="#" class="nav-link">KITCHEN DOORS</a>
+                        <a href="{{ route('category', ['category_slug' => $category->slug]) }}" class="nav-link">{{ $category->name }}</a>
                         @if($category->hasChildren()>0)
                             <div class="dropdown-menu">
                                 @foreach($category->children as $child)
-                                    <a href="{{ $child->slug }}" class="dropdown-item">{{ $child->name }}</a>
+                                    <a href="{{ route('category.items', ['category_slug' => $category->slug, 'child_slug' => $child->slug]) }}"
+                                       class="dropdown-item">
+                                        {{ $child->name }}
+                                    </a>
                                 @endforeach
                             </div>
                         @endif

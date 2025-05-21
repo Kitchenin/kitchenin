@@ -7,8 +7,8 @@ use App\Ending;
 use App\Group;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Product;
 use App\Option;
-use App\Product;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller

@@ -12,7 +12,7 @@ class Photo extends ShopModel
 
     public static $TYPES = [
         'categories' => 'App\Models\Category',
-        'products' => 'App\Product',
+        'products' => 'App\Models\Product',
         'colours' => 'App\Colour',
         'options' => 'App\Option',
         'endings' => 'App\Ending',
