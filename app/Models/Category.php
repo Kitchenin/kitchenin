@@ -1,7 +1,8 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
+use App\ShopModel;
 use App\Traits\OrderByIndex;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -21,12 +22,12 @@ class Category extends ShopModel
 
     public function parent()
     {
-        return $this->belongsTo('App\Category', 'parent_id');
+        return $this->belongsTo('App\Models\Category', 'parent_id');
     }
 
     public function children()
     {
-        return $this->hasMany('App\Category', 'parent_id');
+        return $this->hasMany('App\Models\Category', 'parent_id');
     }
 
     public function products()

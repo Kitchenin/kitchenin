@@ -6,11 +6,11 @@ use App\ColourGroup;
 use App\EndingGroup;
 use App\Group;
 use App\Helpers\ExcelHelper;
+use App\Helpers\PhotoHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProductRequest;
-use App\Category;
+use App\Models\Category;
 use App\Product;
-use App\Helpers\PhotoHelper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 

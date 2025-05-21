@@ -14,7 +14,8 @@ class ViewComposerServiceProvider extends ServiceProvider
     public function boot()
     {
         view()->composer('admin.partials.categories_navigation', function($view) {
-            $categories = \App\Category::getMainCategories()->where('parent_id', null)->all();
+            $categories = \App\Models\Category::getMainCategories()->where('parent_id', null)->all();
+            dd($categories);
             $view->with('categories', $categories);
         });
     }

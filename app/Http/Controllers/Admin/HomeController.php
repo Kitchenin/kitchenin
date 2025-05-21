@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Category;
 use App\Colour;
 use App\Ending;
 use App\Group;
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Option;
 use App\Product;
 use Illuminate\Http\Request;
@@ -14,7 +14,7 @@ use Illuminate\Http\Request;
 class HomeController extends Controller
 {
 
-    private static $MODELS = [
+    private static array $MODELS = [
         'categories' => Category::class,
         'endings' => Ending::class,
         'colours' => Colour::class,

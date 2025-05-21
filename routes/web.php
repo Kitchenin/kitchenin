@@ -10,6 +10,9 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+use Illuminate\Support\Facades\Route;
+
 Route::group([
     'prefix' => 'admin',
     'middleware' => 'auth',
@@ -140,9 +143,6 @@ Route::group([
     Route::post('paypalwebhook', 'PayPalController@webhook');
 
     Route::get('/', 'HomeController@index');
-    Route::get('{segment1}', 'HomeController@index');
-    Route::get('{segment1}/{segment2}', 'HomeController@index');
-    Route::get('{segment1}/{segment2}/{segment3}', 'HomeController@index');
-    Route::get('{segment1}/{segment2}/{segment3}/{segment4}', 'HomeController@index');
+    Route::get('/{category_slug}','CategoryController@getItems');
 
 });

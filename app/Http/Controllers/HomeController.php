@@ -3,15 +3,15 @@
 namespace App\Http\Controllers;
 
 
+use App\Models\Category;
 use Illuminate\Support\Facades\View;
+use Illuminate\Foundation\Vite;
 
 class HomeController extends Controller
 {
     public function index()
     {
-        return view('angular-index', [
-            // 'stripeKey' => config('services.stripe.key'),
-            // 'paypal' => config('services.paypal'),
-        ]);
+
+        return view('home', $this->data);
     }
 }
