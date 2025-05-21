@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helpers\PhotoHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCategoryRequest;
-use App\Category;
-use App\Helpers\PhotoHelper;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -57,6 +57,7 @@ class CategoryController extends Controller
 
     public function edit(Request $request, Category $category)
     {
+
         if (!$request->ajax()) {
             return view('admin.category.index', [
                 'editId' => $category->id

@@ -1,6 +1,6 @@
 /node_modules
-/public/hot
-/public/storage
+/public.old/hot
+/public.old/storage
 /storage/*.key
 /vendor
 /.idea
@@ -14,3 +14,5 @@ yarn-error.log
 /storage/debugbar
 composer.json.bkp
 age.key
+/old_stuff
+composer.lock

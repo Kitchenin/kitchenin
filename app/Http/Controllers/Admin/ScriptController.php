@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Category;
 use App\Http\Controllers\Controller;
-
+use App\Models\Category;
 use Cornford\Backup\Facades\Backup;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;

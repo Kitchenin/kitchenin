@@ -11,7 +11,7 @@ class Photo extends ShopModel
     protected $fillable = ['photoable_id', 'photoable_type', 'filename', 'featured'];
 
     public static $TYPES = [
-        'categories' => 'App\Category',
+        'categories' => 'App\Models\Category',
         'products' => 'App\Product',
         'colours' => 'App\Colour',
         'options' => 'App\Option',
